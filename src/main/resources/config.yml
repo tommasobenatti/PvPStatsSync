@@ -1,0 +1,94 @@
+# =====================================================
+# PvPStatsSync – PlaceholderAPI Wiki
+# =====================================================
+#
+# Identifier: %pvpsync_*
+#
+# Tutti i placeholder funzionano SOLO se PlaceholderAPI
+# è installato e il plugin PvPStatsSync è abilitato.
+#
+# =====================================================
+# PLAYER STATS (personali)
+# =====================================================
+#
+# %pvpsync_kills%
+#   → Numero totale di kill del player
+#
+# %pvpsync_deaths%
+#   → Numero totale di morti del player
+#
+# %pvpsync_killstreak%
+#   → Killstreak attuale del player
+#
+# %pvpsync_kdr%
+#   → Kill / Death Ratio (formattato con 2 decimali)
+#
+# =====================================================
+# TOP KILLS – LEADERBOARD GLOBALE
+# =====================================================
+#
+# Formato:
+# %pvpsync_topkills_<posizione>_name%
+# %pvpsync_topkills_<posizione>_kills%
+#
+# Esempi:
+# %pvpsync_topkills_1_name%   → Nome del #1 per kill
+# %pvpsync_topkills_1_kills%  → Kill del #1
+#
+# %pvpsync_topkills_5_name%   → Nome del #5
+# %pvpsync_topkills_5_kills%  → Kill del #5
+#
+# Posizione supportata:
+# 1 → 10 (consigliato)
+#
+# Se la posizione non esiste:
+# - _name → stringa vuota
+# - _kills → 0
+#
+# =====================================================
+# PLAYER RANK (classifica personale)
+# =====================================================
+#
+# %pvpsync_topkills_personal_rank%
+#   → Posizione del player nella classifica globale
+#     delle kill (1 = primo)
+#
+# %pvpsync_topkills_personal_kills%
+#   → Kill del player (alias di %pvpsync_kills%)
+#
+# Nota:
+# - Se il player NON è presente nel database,
+#   la posizione restituita sarà 0
+#
+# =====================================================
+# ESEMPI DI UTILIZZO (MiniMessage)
+# =====================================================
+#
+# <gold>Kill:</gold> %pvpsync_kills%
+# <yellow>Posizione:</yellow> #%pvpsync_topkills_personal_rank%
+#
+# <yellow>①</yellow> %pvpsync_topkills_1_name%
+# <gray>•</gray> %pvpsync_topkills_1_kills%
+#
+# =====================================================
+database:
+  host: "127.0.0.1"
+  port: 3306
+  name: "minecraft"
+  user: "minecraft"
+  password: "password"
+  parameters: "useSSL=false&characterEncoding=utf8&useUnicode=true&serverTimezone=UTC"
+  pool:
+    maximumPoolSize: 10
+    minimumIdle: 2
+    connectionTimeoutMs: 10000
+
+cache:
+  # Cache stats in RAM to reduce DB reads
+  expireSeconds: 60
+
+sync:
+  # Usefull with uuid changed but same nickname ex. Player transitions from cracked to premium
+  updateUuidIfNicknameMatches: true
+  # if uuid exists but nickname changed -> update nickname
+  updateNicknameIfUuidMatches: true

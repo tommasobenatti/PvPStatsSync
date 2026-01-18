@@ -1,0 +1,7 @@
+name: PvPStatsSync
+main: it.mcexp.pvpsync.PvPStatsSync
+version: 1.0.0
+api-version: "1.20"
+author: McExp
+softdepend: [PlaceholderAPI]
+description: Sync PvP stats across servers via shared database (nick+uuid).
